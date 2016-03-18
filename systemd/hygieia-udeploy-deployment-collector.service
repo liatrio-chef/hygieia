@@ -1,0 +1,14 @@
+[Unit]
+Description=Hygieia Udeploy Deployment Collector
+After=hygieia-api.service
+
+[Service]
+Type=simple
+User=vagrant
+WorkingDirectory=/home/vagrant/Hygieia/udeploy-deployment-collector/target
+ExecStart=/usr/bin/java -jar /home/vagrant/Hygieia/udeploy-deployment-collector/target/udeploy-deployment-collector-2.0.0-SNAPSHOT.jar --spring.config.location=/home/vagrant/dashboard.properties
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Hygieia API Service
+After=network.target
+
+[Service]
+Type=simple
+User=vagrant
+WorkingDirectory=/home/vagrant/Hygieia/UI
+ExecStart=/usr/bin/gulp serve
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target
