@@ -1,0 +1,11 @@
+DEPENDENCIES
+  hygieia-liatrio
+    path: .
+    metadata: true
+
+GRAPH
+  apt (3.0.0)
+  hygieia-liatrio (0.2.0)
+    java (>= 0.0.0)
+  java (1.39.0)
+    apt (>= 0.0.0)

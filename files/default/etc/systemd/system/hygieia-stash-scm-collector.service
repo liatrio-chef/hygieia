@@ -1,0 +1,14 @@
+[Unit]
+Description=Hygieia GitHub SCM Collector
+After=hygieia-api.service
+
+[Service]
+Type=simple
+User=vagrant
+WorkingDirectory=/home/vagrant/Hygieia/stash-scm-collector/target
+ExecStart=/usr/bin/java -jar /home/vagrant/Hygieia/stash-scm-collector/target/stash-scm-collector-2.0.0-SNAPSHOT.jar --spring.config.location=/home/vagrant/dashboard.properties
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target
