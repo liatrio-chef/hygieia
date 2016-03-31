@@ -50,6 +50,14 @@ end
   end
 end
 
+# fix git to use https instead of git uri, breaks bower
+execute 'git-use-https' do
+  command 'git config -f /home/vagrant/.gitconfig url."https://".insteadOf git://'
+  user 'vagrant'
+  group 'vagrant'
+  cwd '/home/vagrant'
+end
+
 # install nodejs and npm
 %w{ nodejs npm }.each do |pkg|
   package pkg do
@@ -62,15 +70,14 @@ execute 'install-bower-1st' do
   command 'npm install -g bower'
   user 'root'
   group 'root'
-  not_if ('which bower')
 end
 
-# install bower (2nd time), needed to run twice for some reason?
+# install bower (2nd time), needed to run twice for some reason? fix this
 execute 'install-bower-2nd' do
   command 'npm install -g bower'
   user 'root'
   group 'root'
-  not_if ('which bower')
+  #not_if ('which bower')
 end
 
 # pull down latest maven, 3.3.9 required by Hygieia
@@ -108,13 +115,13 @@ execute 'git-clone-hygieia' do
   not_if do ::File.exists?('/home/vagrant/Hygieia') end
 end
 
-# mvn clean install
+# mvn clean install - cwd is not working, fix this
 execute 'mvn-clean-install' do
-  command 'PATH=/home/vagrant/apache-maven-3.3.9/bin:$PATH mvn clean install'
+  command 'sudo -u vagrant PWD=/home/vagrant/Hygieia /home/vagrant/apache-maven-3.3.9/bin/mvn --quiet clean install'
   user 'vagrant'
   group 'vagrant'
   cwd '/home/vagrant/Hygieia'
-  not_if do ::File.exists?('/home/vagrant/Hygieia/api/target/api.jar') end
+  #not_if do ::File.exists?('/home/vagrant/Hygieia/api/target/api.jar') end
   ignore_failure true
 end
 
@@ -129,7 +136,7 @@ end
 
 # Replace logo until we create a new theme
 cookbook_file '/home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png ' do
-  source 'home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png '
+  source 'home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png'
   owner 'vagrant'
   group 'vagrant'
   mode '0644'
@@ -153,6 +160,18 @@ cookbook_file '/etc/systemd/system/hygieia-api.service' do
 end
 
 service "hygieia-api" do
+  action [ :enable, :start ]
+end
+
+cookbook_file '/etc/systemd/system/hygieia-ui.service' do
+  source 'etc/systemd/system/hygieia-ui.service'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  action :create
+end
+
+service "hygieia-ui" do
   action [ :enable, :start ]
 end
 
