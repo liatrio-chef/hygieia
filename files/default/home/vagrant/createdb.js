@@ -1,5 +1,3 @@
-use dashboard;
-
 db.createUser(
         {
           user: "db",

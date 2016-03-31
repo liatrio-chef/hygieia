@@ -1,5 +1,5 @@
 [Unit]
-Description=Hygieia API Service
+Description=Hygieia UI Service
 After=network.target
 
 [Service]

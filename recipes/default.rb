@@ -28,12 +28,13 @@ service "mongod" do
   action [ :enable, :start ]
 end
 
-# create lock file, should make this into a mongodb command
-file '/home/vagrant/createdb.done' do
-  user 'vagrant'
+cookbook_file '/home/vagrant/createdb.js' do
+  source 'home/vagrant/createdb.js'
+  owner 'vagrant'
   group 'vagrant'
+  mode '0644'
   action :create
-end
+end 
 
 # create mongo db user
 execute 'create-mongo-db-user' do
@@ -41,6 +42,13 @@ execute 'create-mongo-db-user' do
   user 'vagrant'
   group 'vagrant'
   not_if do ::File.exists?('/home/vagrant/createdb.done') end
+end
+
+# create lock file, should make this into a mongodb command
+file '/home/vagrant/createdb.done' do
+  user 'vagrant'
+  group 'vagrant'
+  action :create
 end
 
 # ensure git and epel-release are installed
@@ -72,13 +80,22 @@ execute 'install-bower-1st' do
   group 'root'
 end
 
-# install bower (2nd time), needed to run twice for some reason? fix this
 execute 'install-bower-2nd' do
   command 'npm install -g bower'
   user 'root'
   group 'root'
   #not_if ('which bower')
 end
+
+# install gulp
+execute 'install-gulp' do
+  command 'npm install -g gulp'
+  user 'root'
+  group 'root'
+  not_if ('which gulp')
+end
+
+# install bower (2nd time), needed to run twice for some reason? fix this
 
 # pull down latest maven, 3.3.9 required by Hygieia
 remote_file '/home/vagrant/apache-maven-3.3.9-bin.tar.gz' do
