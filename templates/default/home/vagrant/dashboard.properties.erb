@@ -14,7 +14,7 @@ subversion.cron=0 0/1 * * * *
 feature.cron=0 0/1 * * * *
 
   #Hudson server (required) - Can provide multiple
-  jenkins.servers[0]=http://192.168.100.10:8080/
+  jenkins.servers[0]=<%= node[:hygieia_liatrio][:jenkins_url] %>
 
   #Determines if build console log is collected - defaults to false
   jenkins.saveLog=true
@@ -24,23 +24,23 @@ feature.cron=0 0/1 * * * *
   #jenkins.apiKey=
 
   #UDeploy server (required) - Can provide multiple
-  udeploy.servers[0]=https://192.168.100.40:8080
+  udeploy.servers[0]=<%= node[:hygieia_liatrio][:udeploy_url] %>
 
   #UDeploy user name (required)
-  udeploy.username=admin
+  udeploy.username=<%= node[:hygieia_liatrio][:udeploy_username] %>
 
   #UDeploy password (required)
-  udeploy.password=password
+  udeploy.password=<%= node[:hygieia_liatrio][:udeploy_password] %>
 
   #Sonar server(s) (required) - Can provide multiple
-  sonar.servers[0]=http://192.168.100.70:9000
+  sonar.servers[0]=<%= node[:hygieia_liatrio][:sonar_url] %>
 
   #Sonar Metrics
   sonar.metrics=ncloc,line_coverage,violations,critical_violations,major_violations,blocker_violations,sqale_index,test_success_density,test_failures,test_errors,tests
 
 
   #mandatory
-  git.host=http://192.168.100.60:7990/
+  git.host=<%= node[:hygieia_liatrio][:stash_url] %>
 
   #mandatory
   git.api=/rest/api/1.0/

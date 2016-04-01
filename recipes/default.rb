@@ -160,12 +160,12 @@ cookbook_file '/home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png ' do
   action :create
 end
 
-cookbook_file '/home/vagrant/dashboard.properties' do
+template '/home/vagrant/dashboard.properties' do
   source 'home/vagrant/dashboard.properties'
   owner 'vagrant'
   group 'vagrant'
   mode '0644'
-  action :create
+  variables ([])
 end
 
 cookbook_file '/etc/systemd/system/hygieia-api.service' do
