@@ -138,7 +138,7 @@ execute 'mvn-clean-install' do
   user 'vagrant'
   group 'vagrant'
   cwd '/home/vagrant/Hygieia'
-  #not_if do ::File.exists?('/home/vagrant/Hygieia/api/target/api.jar') end
+  not_if do ::File.exists?('/home/vagrant/Hygieia/api/target/api.jar') end
   ignore_failure true
 end
 
