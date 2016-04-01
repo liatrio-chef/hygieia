@@ -161,7 +161,7 @@ cookbook_file '/home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png ' do
 end
 
 template '/home/vagrant/dashboard.properties' do
-  source 'home/vagrant/dashboard.properties'
+  source 'home/vagrant/dashboard.properties.erb'
   owner 'vagrant'
   group 'vagrant'
   mode '0644'
