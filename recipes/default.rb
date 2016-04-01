@@ -165,7 +165,7 @@ template '/home/vagrant/dashboard.properties' do
   owner 'vagrant'
   group 'vagrant'
   mode '0644'
-  variables ([])
+  variables ({})
 end
 
 cookbook_file '/etc/systemd/system/hygieia-api.service' do
