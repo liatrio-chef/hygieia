@@ -1,5 +1,5 @@
 default[:hygieia_liatrio][:jenkins_url]		= 'http://192.168.100.10:8080/'
-default[:hygieia_liatrio][:udeploy_url]		= 'https://192.168.100.40:8080'
+default[:hygieia_liatrio][:udeploy_url]		= 'http://192.168.100.40:8080'
 default[:hygieia_liatrio][:udeploy_username]	= 'admin'
 default[:hygieia_liatrio][:udeploy_password]	= 'password'
 default[:hygieia_liatrio][:sonar_url]		= 'http://192.168.100.10:9000/'
