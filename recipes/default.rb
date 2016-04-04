@@ -152,7 +152,7 @@ cookbook_file '/home/vagrant/Hygieia/UI/src/app/dashboard/views/widget.html' do
 end
 
 # Replace logo until we create a new theme
-cookbook_file '/home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png ' do
+cookbook_file '/home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png' do
   source 'home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png'
   owner 'vagrant'
   group 'vagrant'
