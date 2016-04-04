@@ -2,9 +2,7 @@
 # Cookbook Name:: hygieia-liatrio
 # Recipe:: default
 #
-# Copyright 2016, liatrio
-#
-# All rights reserved - Do Not Redistribute
+# Authors:: Drew Holt <drew@liatrio.com>
 #
 
 template '/home/vagrant/projects/Hygieia/api/target/dashboard.properties' do
