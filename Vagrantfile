@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
     chef.json = {
       "java" => {
         "jdk_version" => "8"
-      }
+      },
       "hygieia_liatrio" => {
         "dbname" => "dashboard",
         "dbhost" => "127.0.0.1",
