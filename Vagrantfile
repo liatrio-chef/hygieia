@@ -22,6 +22,13 @@ Vagrant.configure(2) do |config|
       "java" => {
         "jdk_version" => "8"
       }
+      "hygieia_liatrio" => {
+        "dbname" => "dashboard",
+        "dbhost" => "127.0.0.1",
+        "dbport" => 27017,
+        "dbusername" => "db",
+        "dbpassword" => "dbpass"
+      }
     }
   end
 

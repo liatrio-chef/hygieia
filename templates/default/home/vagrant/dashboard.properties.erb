@@ -1,9 +1,9 @@
 # dashboard.properties
-dbname=dashboard
-dbhost=127.0.0.1
-dbport=27017
-dbusername=db
-dbpassword=dbpass
+dbname=<%= node[:hygieia_liatrio][:dbname] %>
+dbhost=<%= node[:hygieia_liatrio][:dbhost] %>
+dbport=<%= node[:hygieia_liatrio][:dbport] %>
+dbusername=<%= node[:hygieia_liatrio][:dbusername] %>
+dbpassword=<%= node[:hygieia_liatrio][:dbpassword] %>
 
     #Collector schedule (required)
 github.cron=0 0/1 * * * *
