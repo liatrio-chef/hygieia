@@ -160,6 +160,15 @@ cookbook_file '/home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png' do
   action :create
 end
 
+# Workaround to set black title text
+cookbook_file '/home/vagrant/Hygieia/UI/src/components/templates/capone.html' do
+  source 'home/vagrant/Hygieia/UI/src/components/templates/capone.html'
+  owner 'vagrant'
+  group 'vagrant'
+  mode '0644'
+  action :create
+end
+
 template '/home/vagrant/dashboard.properties' do
   source 'home/vagrant/dashboard.properties.erb'
   owner 'vagrant'
@@ -249,6 +258,18 @@ cookbook_file '/etc/systemd/system/hygieia-stash-scm-collector.service' do
 end
 
 service "hygieia-stash-scm-collector" do
+  action [ :enable, :start ]
+end
+
+cookbook_file '/etc/systemd/system/hygieia-jira-feature-collector.service' do
+  source 'etc/systemd/system/hygieia-jira-feature-collector.service'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  action :create
+end
+
+service "hygieia-jira-feature-collector" do
   action [ :enable, :start ]
 end
 
