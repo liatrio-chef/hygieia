@@ -196,7 +196,6 @@ execute 'backup and overwrite theme' do
   cp slate.less slate.less.orig; \
   cp default.less dash.less; \
   cp default.less dash-display.less; \
-  cp default.less dash.less; \
   cp default.less slate.less;' 
   cwd '/home/vagrant/Hygieia/UI/src/components/themes'
   user 'vagrant'
