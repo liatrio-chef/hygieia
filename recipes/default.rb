@@ -191,8 +191,14 @@ end
 
 # backups current them and overwrites default with dash theme
 execute 'backup and overwrite theme' do
-  command 'cp /home/vagrant/Hygieia/UI/src/components/themes/default.less /home/vagrant/Hygieia/UI/src/components/themes/default.less.orig;
-cp /home/vagrant/Hygieia/UI/src/components/themes/dash.less /home/vagrant/Hygieia/UI/src/components/themes/default.less'
+  command 'cp dash.less dash.less.orig; \
+  cp dash-display.less dash-display.less.orig; \
+  cp slate.less slate.less.orig; \
+  cp default.less dash.less; \
+  cp default.less dash-display.less; \
+  cp default.less dash.less; \
+  cp default.less slate.less;' 
+  cwd '/home/vagrant/Hygieia/UI/src/components/themes'
   user 'vagrant'
   group 'vagrant'
 end
