@@ -189,6 +189,24 @@ service "hygieia-api" do
   action [ :enable, :start ]
 end
 
+# backups current them and overwrites default with dash theme
+
+remote_file “backup default theme“ do
+  path “/home/vagrantHygieia/UI/src/components/themes/default.less.orig”
+  source "file:///home/vagrantHygieia/UI/src/components/themes/default.less"
+  owner ‘vagrant’
+  group ‘vagrant’
+  mode 0666
+end
+
+remote_file “overwrite default theme“ do
+  path “/home/vagrantHygieia/UI/src/components/themes/default.less”
+  source "file:///home/vagrantHygieia/UI/src/components/themes/dash.less"
+  owner ‘vagrant’
+  group ‘vagrant’
+  mode 0666
+end
+
 cookbook_file '/etc/systemd/system/hygieia-ui.service' do
   source 'etc/systemd/system/hygieia-ui.service'
   owner 'root'
