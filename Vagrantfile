@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "liatrio/centos7chefclient"
+  config.vm.box = "liatrio/centos7chefjava"
 
   config.vm.network "forwarded_port", guest: 3000, host: 13000
   config.vm.network "forwarded_port", guest: 8080, host: 18088
