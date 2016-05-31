@@ -23,6 +23,14 @@ end
   end
 end
 
+cookbook_file '/etc/mongod.conf' do
+  source 'etc/mongod.conf'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  action :create
+end
+
 # start and enable mongodb
 service "mongod" do
   action [ :enable, :start ]
