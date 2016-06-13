@@ -133,7 +133,7 @@ end
 
 # git clone hygieia 
 execute 'git-clone-hygieia' do
-  command 'git clone https://github.com/capitalone/Hygieia.git'
+  command 'git clone https://github.com/Liatrio/Hygieia.git'
   user 'vagrant'
   group 'vagrant'
   cwd '/home/vagrant'
