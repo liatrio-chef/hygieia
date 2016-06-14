@@ -6,7 +6,7 @@ After=hygieia-api.service
 Type=simple
 User=vagrant
 WorkingDirectory=/home/vagrant/Hygieia/github-scm-collector/target
-ExecStart=/usr/bin/java -jar /home/vagrant/Hygieia/github-scm-collector/target/github-scm-collector-2.0.0-SNAPSHOT.jar --spring.config.location=/home/vagrant/dashboard.properties
+ExecStart=/usr/bin/java -jar /home/vagrant/Hygieia/github-scm-collector/target/github-scm-collector-2.0.2-SNAPSHOT.jar --spring.config.location=/home/vagrant/dashboard.properties
 Restart=on-abort
 
 
