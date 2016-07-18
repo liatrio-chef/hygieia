@@ -37,7 +37,7 @@ mvn clean install
 ``` 
 This may need to be done mulltiple times as there are network issues when maven tries to mirror artifacts through Archiva. Once maven has compiled successfully, restart the Hygieia collectors: `cd /etc/systemd/system; sudo systemctl restart hygieia-*`.
 
-Once successful, point your browser to http://localhost:13000/ or http://192.168.1.10:3000/ if you are using the same networking in the supplied Vagrantfile from this repo.
+Once successful, point your browser to http://localhost:13000/ - Hygieia listens on TCP3000 and is forwarded to TCP13000 in the supplied Vagrantfile.
 
 Attributes
 ----------
