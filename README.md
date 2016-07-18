@@ -16,6 +16,7 @@ Ensure the vagrant-berkshelf plugin is installed: `vagrant plugin install vagran
 
 Usage
 -----
+A complelely baked version of this cookbook preconfigured and with dummy data can be found here: https://github.com/liatrio-chef/hygieia-petclinic-demo-baked
 A completely baked version of this cookbook can be found here:
 https://github.com/liatrio-chef/hygieia-dev-baked
 
