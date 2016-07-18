@@ -1,5 +1,9 @@
 <VirtualHost _default_:80>
-  DocumentRoot /var/www/html
+  DocumentRoot /var/www/hygieia.local
+
+<Location />
+  Require all granted
+</Location>
 
 <Location /api>
   Require all granted
