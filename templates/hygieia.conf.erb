@@ -1,0 +1,7 @@
+<VirtualHost _default_:80>
+  DocumentRoot /var/www/html
+
+  ProxyPass /api http://127.0.0.1:8080/api
+  ProxyPassReverse /api http://127.0.0.1:8080/api
+
+</VirtualHost>
