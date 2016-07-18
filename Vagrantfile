@@ -20,6 +20,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "chef_solo" do |chef|
     chef.add_recipe "hygieia-liatrio"
+    chef.add_recipe "hygieia-liatrio::apache2"
     chef.json = {
       "java" => {
         "jdk_version" => "8"
