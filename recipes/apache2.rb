@@ -9,6 +9,13 @@ include_recipe 'apache2'
 include_recipe 'apache2::mod_proxy'
 include_recipe 'apache2::mod_proxy_http'
 
+# need this so apache can access the directory
+# /home/vagrant/Hygieia/UI/dist 
+# it is a symlink to /var/www/hygieia.local
+directory '/home/vagrant' do
+  mode '0755'
+end
+
 web_app 'hygieia' do
    template 'hygieia.conf.erb'
 end

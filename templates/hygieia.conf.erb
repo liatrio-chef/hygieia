@@ -1,6 +1,11 @@
 <VirtualHost _default_:80>
   DocumentRoot /var/www/hygieia.local
 
+<Directory /var/www/hygieia.local>
+  Options FollowSymLinks Indexes
+  AllowOverride None
+</Directory>
+
 <Location />
   Require all granted
 </Location>
