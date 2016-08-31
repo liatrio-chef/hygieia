@@ -16,6 +16,11 @@ directory '/home/vagrant' do
   mode '0755'
 end
 
+# ln -s /home/vagrant/Hygieia/UI/dist /var/www/hygieia.local
+link '/var/www/hygieia.local' do
+  to '/home/vagrant/Hygieia/UI/dist'
+end
+
 web_app 'hygieia' do
    template 'hygieia.conf.erb'
 end
