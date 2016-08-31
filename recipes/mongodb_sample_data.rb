@@ -11,6 +11,7 @@ remote_directory '/home/vagrant/hygieia_mongod' do
   group 'vagrant'
   mode '0755'
   action :create
+  cookbook node['hygieia-liatrio']['parent_cookbook']
 end
 
 execute 'import hygieia_mongod' do

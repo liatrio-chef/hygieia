@@ -1,3 +1,4 @@
+default[:hygieia_liatrio][:parent_cookbook]	= ""
 default[:hygieia_liatrio][:collectors]		= %w{core api ui github-scm-collector jenkins-build-collector sonar-codequality-collector udeploy-deployment-collector stash-scm-collector}
 default[:hygieia_liatrio][:dbname]		= 'dashboard'
 default[:hygieia_liatrio][:dbhost]		= '127.0.0.1'
