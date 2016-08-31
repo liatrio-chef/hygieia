@@ -1,0 +1,25 @@
+# Run `ruby update_timestamps.rb` in the VM to
+# update the commit and build mongodb data to increase by
+# the current time subtracted from the latest build time.
+#
+# Saves the trouble of having to manually update time stamps
+# or pull new data in for demos.
+
+require 'mongo'
+
+client = Mongo::Client.new('mongodb://localhost:27017/dashboard')
+
+last_timestamp = client[:builds].find({'number' => '12'}).projection({endTime: 1, _id: 0}).first
+
+timenow = Time.now.to_i*1000
+
+jumptime = timenow-last_timestamp['endTime']
+
+# update the commits collection :timestamp and :scmCommitTimestamp by exactly 24 hours
+update_timestamp = client[:commits].find.update_many("$inc" => { :timestamp => jumptime } )
+update_scmCommitTimestamp = client[:commits].find.update_many("$inc" => { :scmCommitTimestamp => jumptime } )
+
+# updates the build collection timestamps by exactly 24 hours
+update_timestamp = client[:builds].find.update_many("$inc" => { :timestamp => jumptime } )
+update_startTime = client[:builds].find.update_many("$inc" => { :startTime => jumptime } )
+update_endTime = client[:builds].find.update_many("$inc" => { :endTime => jumptime } )
