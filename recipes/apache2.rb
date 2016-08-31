@@ -17,8 +17,8 @@ directory '/home/vagrant' do
 end
 
 # ln -s /home/vagrant/Hygieia/UI/dist /var/www/hygieia.local
-link '/var/www/hygieia.local' do
-  to '/home/vagrant/Hygieia/UI/dist'
+link "/var/www/hygieia.local" do
+  to node[:hygieia_liatrio][:symlink]
 end
 
 web_app 'hygieia' do

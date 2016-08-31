@@ -1,3 +1,4 @@
+default[:hygieia_liatrio][:symlink]             = "/home/vagrant/Hygieia/UI/dist"
 default[:hygieia_liatrio][:parent_cookbook]	= ""
 default[:hygieia_liatrio][:collectors]		= %w{core api ui github-scm-collector jenkins-build-collector sonar-codequality-collector udeploy-deployment-collector stash-scm-collector}
 default[:hygieia_liatrio][:dbname]		= 'dashboard'
