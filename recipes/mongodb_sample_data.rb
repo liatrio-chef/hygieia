@@ -6,7 +6,7 @@
 #
 
 # needed to compile ruby gems
-package gcc
+package "gcc"
 
 remote_directory '/home/vagrant/hygieia_mongod' do
   source 'hygieia_mongod'
