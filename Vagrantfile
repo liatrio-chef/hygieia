@@ -2,12 +2,12 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "liatrio/centos7chefjava"
+  config.vm.box = "bento/centos-7.2"
 
   config.vm.network "forwarded_port", guest: 80, host: 1080
   config.vm.network "forwarded_port", guest: 443, host: 1443
   config.vm.network "forwarded_port", guest: 3000, host: 13000
-  config.vm.network "forwarded_port", guest: 8080, host: 18088
+  config.vm.network "forwarded_port", guest: 8080, host: 18080
 
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -19,8 +19,11 @@ Vagrant.configure(2) do |config|
   config.berkshelf.enabled = true
 
   config.vm.provision "chef_solo" do |chef|
+    chef.add_recipe "hygieia-liatrio::mongodb"
+    chef.add_recipe "hygieia-liatrio::node"
     chef.add_recipe "hygieia-liatrio"
     chef.add_recipe "hygieia-liatrio::apache2"
+    #chef.add_recipe "hygieia-liatrio::mongodb_sample_data" # add this recipe to add dummy data
     chef.json = {
       "java" => {
         "jdk_version" => "8"
@@ -34,7 +37,5 @@ Vagrant.configure(2) do |config|
       }
     }
   end
-
-  config.vm.provision "shell", inline: "firewall-cmd --permanent --add-port=80/tcp --add-port=443/tcp --add-port=3000/tcp --add-port=8080/tcp && firewall-cmd --reload"
 
 end

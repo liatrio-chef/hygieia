@@ -7,64 +7,8 @@
 
 include_recipe "java"
 
-# setup mongodb repo
-cookbook_file '/etc/yum.repos.d/mongodb-3.2.repo' do
-  source 'etc/yum.repos.d/mongodb-3.2.repo'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-
-# install mongodb
-%w{ mongodb-org }.each do |pkg|
-  package pkg do
-    action :install
-  end
-end
-
-cookbook_file '/etc/mongod.conf' do
-  source 'etc/mongod.conf'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-
-# start and enable mongodb
-service "mongod" do
-  action [ :enable, :start ]
-end
-
-cookbook_file '/home/vagrant/createdb.js' do
-  source 'home/vagrant/createdb.js'
-  owner 'vagrant'
-  group 'vagrant'
-  mode '0644'
-  action :create
-end 
-
-# create mongo db user
-execute 'create-mongo-db-user' do
-  command 'mongo dashboard /home/vagrant/createdb.js'
-  user 'vagrant'
-  group 'vagrant'
-  not_if do ::File.exists?('/home/vagrant/createdb.done') end
-end
-
-# create lock file, should make this into a mongodb command
-file '/home/vagrant/createdb.done' do
-  user 'vagrant'
-  group 'vagrant'
-  action :create
-end
-
-# ensure git and epel-release are installed
-%w{ git epel-release }.each do |pkg|
-  package pkg do
-    action :install
-  end
-end
+# install git
+package "git"
 
 # fix git to use https instead of git uri, breaks bower
 execute 'git-use-https' do
@@ -74,38 +18,7 @@ execute 'git-use-https' do
   cwd '/home/vagrant'
 end
 
-# install nodejs and npm
-%w{ nodejs npm }.each do |pkg|
-  package pkg do
-    action :install
-  end
-end
-
-# install bower (1st time)
-execute 'install-bower-1st' do
-  command 'npm install -g bower'
-  user 'root'
-  group 'root'
-end
-
-execute 'install-bower-2nd' do
-  command 'npm install -g bower'
-  user 'root'
-  group 'root'
-  #not_if ('which bower')
-end
-
-# install gulp
-execute 'install-gulp' do
-  command 'npm install -g gulp'
-  user 'root'
-  group 'root'
-  not_if ('which gulp')
-end
-
-# install bower (2nd time), needed to run twice for some reason? fix this
-
-# pull down latest maven, 3.3.9 required by Hygieia
+# download maven 3.3.9 required by Hygieia
 remote_file '/home/vagrant/apache-maven-3.3.9-bin.tar.gz' do
   source 'http://apache.mirrors.ionfish.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz'
   owner 'vagrant'
@@ -141,33 +54,6 @@ execute 'git-clone-hygieia' do
 end
 
 # mvn clean install - cwd is not working, fix this
-execute 'mvn-clean-install' do
-  command 'sudo -u vagrant PWD=/home/vagrant/Hygieia /home/vagrant/apache-maven-3.3.9/bin/mvn --quiet clean install'
-  user 'vagrant'
-  group 'vagrant'
-  cwd '/home/vagrant/Hygieia'
-  not_if do ::File.exists?('/home/vagrant/Hygieia/api/target/api.jar') end
-  ignore_failure true
-end
-
-# Replace logo until we create a new theme
-cookbook_file '/home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png' do
-  source 'home/vagrant/Hygieia/UI/src/assets/img/hygieia_b.png'
-  owner 'vagrant'
-  group 'vagrant'
-  mode '0644'
-  action :create
-end
-
-# Workaround to set black title text
-cookbook_file '/home/vagrant/Hygieia/UI/src/components/templates/capone.html' do
-  source 'home/vagrant/Hygieia/UI/src/components/templates/capone.html'
-  owner 'vagrant'
-  group 'vagrant'
-  mode '0644'
-  action :create
-end
-
 template '/home/vagrant/dashboard.properties' do
   source 'home/vagrant/dashboard.properties.erb'
   owner 'vagrant'
@@ -176,116 +62,47 @@ template '/home/vagrant/dashboard.properties' do
   variables ({})
 end
 
-cookbook_file '/etc/systemd/system/hygieia-api.service' do
-  source 'etc/systemd/system/hygieia-api.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
+# use mvn --pl to only compile what we need from attribute
+# [:hygieia_liatrio][:collectors] but need to fix issue
+# joining this array into a string
+# "--pl #{mvn_collectors} " 
+#
+# also need to remove skip tests below
+execute "mvn-clean-install" do
+  command "sudo -u vagrant PWD=/home/vagrant/Hygieia " \
+    "/home/vagrant/apache-maven-3.3.9/bin/mvn -Dmaven.test.failure.ignore=true -Dmaven.test.skip=true " \
+    "--quiet install"
+  user "root"
+  group "root"
+  cwd "/home/vagrant/Hygieia"
+  #not_if "ls /home/vagrant/Hygieia/api/target | grep .jar"
 end
 
-service "hygieia-api" do
-  action [ :enable, :start ]
-end
+# add systemd service files for each collector, enable and start them
+node[:hygieia_liatrio][:collectors].each do |hygieia_service|
+  # instead of using the block above, it would be better to compile only
+  # what we need. however this fails trying to find core for the 
+  # compile of sub modules
+  #execute "mvn-clean-install-#{hygieia_serivce}" do
+  #  command "PWD=/home/vagrant/Hygieia/#{hygieia_service} /home/vagrant/apache-maven-3.3.9/bin/mvn -Dmaven.test.failure.ignore=true --quiet install"
+  #  user "vagrant"
+  #  group "vagrant"
+  #  cwd "/home/vagrant/Hygieia/#{hygieia_service}"
+  #  not_if "ls /home/vagrant/Hygieia/#{hygieia_service}/target | grep .jar"
+  #end
 
-# backups current them and overwrites default with dash theme
-execute 'backup and overwrite theme' do
-  command 'cp dash.less dash.less.orig; \
-  cp dash-display.less dash-display.less.orig; \
-  cp slate.less slate.less.orig; \
-  cp default.less dash.less; \
-  cp default.less dash-display.less; \
-  cp default.less slate.less;' 
-  cwd '/home/vagrant/Hygieia/UI/src/components/themes'
-  user 'vagrant'
-  group 'vagrant'
-end
+#node.default['mvn_collectors'] = #{node[:hygieia_liatrio][:collectors]}.join(",")
+  if hygieia_service != "core" 
+  cookbook_file "/etc/systemd/system/hygieia-#{hygieia_service}.service" do
+    source "etc/systemd/system/hygieia-#{hygieia_service}.service"
+    owner "root"
+    group "root"
+    mode "0644"
+    action :create
+  end
 
-cookbook_file '/etc/systemd/system/hygieia-ui.service' do
-  source 'etc/systemd/system/hygieia-ui.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
+  service "hygieia-#{hygieia_service}" do
+    action [ :enable, :start ]
+  end
+  end
 end
-
-service "hygieia-ui" do
-  action [ :enable, :start ]
-end
-
-cookbook_file '/etc/systemd/system/hygieia-github-collector.service' do
-  source 'etc/systemd/system/hygieia-github-collector.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-
-service "hygieia-github-collector" do
-  action [ :enable, :start ]
-end
-
-cookbook_file '/etc/systemd/system/hygieia-jenkins-build-collector.service' do
-  source 'etc/systemd/system/hygieia-jenkins-build-collector.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-
-service "hygieia-jenkins-build-collector" do
-  action [ :enable, :start ]
-end
-
-cookbook_file '/etc/systemd/system/hygieia-sonar-codequality-collector.service' do
-  source 'etc/systemd/system/hygieia-sonar-codequality-collector.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-
-service "hygieia-sonar-codequality-collector" do
-  action [ :enable, :start ]
-end
-
-cookbook_file '/etc/systemd/system/hygieia-udeploy-deployment-collector.service' do
-  source 'etc/systemd/system/hygieia-udeploy-deployment-collector.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-service "hygieia-udeploy-deployment-collector" do
-
-  action [ :enable, :start ]
-end
-
-cookbook_file '/etc/systemd/system/hygieia-stash-scm-collector.service' do
-  source 'etc/systemd/system/hygieia-stash-scm-collector.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-
-service "hygieia-stash-scm-collector" do
-  action [ :enable, :start ]
-end
-
-cookbook_file '/etc/systemd/system/hygieia-jira-feature-collector.service' do
-  source 'etc/systemd/system/hygieia-jira-feature-collector.service'
-  owner 'root'
-  group 'root'
-  mode '0644'
-  action :create
-end
-
-service "hygieia-jira-feature-collector" do
-  action [ :enable, :start ]
-end
-
-service "hygieia-api" do
-  action [ :restart ]
-end
-
