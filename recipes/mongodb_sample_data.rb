@@ -42,7 +42,6 @@ template 'home/vagrant/update_timestamps.rb' do
   owner 'vagrant'
   group 'vagrant'
   mode '755'
-  cookbook node['hygieia_liatrio']['parent_cookbook']
 end
 
 cron 'update mongo timestamps hourly' do
@@ -57,7 +56,6 @@ cookbook_file 'etc/rc.d/rc.local' do
   owner 'root'
   group 'root'
   mode '755'
-  cookbook node['hygieia_liatrio']['parent_cookbook']
 end
 
 execute 'update mongo data in chef run' do
