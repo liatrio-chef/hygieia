@@ -4,9 +4,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=vagrant
-WorkingDirectory=/home/vagrant/Hygieia/UI
-ExecStart=/usr/bin/gulp serve
+User=hygieia
+WorkingDirectory=<%= @jar_home %>/Hygieia/UI
+ExecStart=/bin/gulp serve
 Restart=on-abort
 
 

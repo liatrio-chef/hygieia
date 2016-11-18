@@ -1,0 +1,14 @@
+[Unit]
+Description=Hygieia API Service
+After=network.target
+
+[Service]
+Type=simple
+User=hygieia
+WorkingDirectory=<%= @jar_home %>
+ExecStart=/usr/bin/java -jar <%= @jar_home %>/api.jar --spring.config.location=<%= @jar_home %>/dashboard.properties
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target
