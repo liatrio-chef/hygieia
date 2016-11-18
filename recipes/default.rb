@@ -11,12 +11,12 @@ include_recipe "java"
 package "git"
 
 # fix git to use https instead of git uri, breaks bower
-execute 'git-use-https' do
-  command 'git config -f /home/vagrant/.gitconfig url."https://".insteadOf git://'
-  user 'vagrant'
-  group 'vagrant'
-  cwd '/home/vagrant'
-end
+#execute 'git-use-https' do
+#  command 'git config -f /home/vagrant/.gitconfig url."https://".insteadOf git://'
+#  user 'vagrant'
+#  group 'vagrant'
+#  cwd '/home/vagrant'
+#end
 
 # download maven 3.3.9 required by Hygieia
 remote_file '/home/vagrant/apache-maven-3.3.9-bin.tar.gz' do
