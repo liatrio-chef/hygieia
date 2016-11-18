@@ -1,9 +1,9 @@
 # dashboard.properties
-dbname=<%= node[:hygieia_liatrio][:dbname] %>
-dbhost=<%= node[:hygieia_liatrio][:dbhost] %>
-dbport=<%= node[:hygieia_liatrio][:dbport] %>
-dbusername=<%= node[:hygieia_liatrio][:dbusername] %>
-dbpassword=<%= node[:hygieia_liatrio][:dbpassword] %>
+dbname=<%= node["hygieia_liatrio"]["dbname"] %>
+dbhost=<%= node["hygieia_liatrio"]["dbhost"] %>
+dbport=<%= node["hygieia_liatrio"]["dbport"] %>
+dbusername=<%= node["hygieia_liatrio"]["dbusername"] %>
+dbpassword=<%= node["hygieia_liatrio"]["dbpassword"] %>
 
     #Collector schedule (required)
 github.cron=0 0/1 * * * *
@@ -14,7 +14,7 @@ subversion.cron=0 0/1 * * * *
 feature.cron=0 0/1 * * * *
 
   #Hudson server (required) - Can provide multiple
-  jenkins.servers[0]=<%= node[:hygieia_liatrio][:jenkins_url] %>
+  jenkins.servers[0]=<%= node["hygieia_liatrio"]["jenkins_url"] %>
 
   #Determines if build console log is collected - defaults to false
   jenkins.saveLog=true
@@ -24,23 +24,23 @@ feature.cron=0 0/1 * * * *
   #jenkins.apiKey=
 
   #UDeploy server (required) - Can provide multiple
-  udeploy.servers[0]=<%= node[:hygieia_liatrio][:udeploy_url] %>
+  udeploy.servers[0]=<%= node["hygieia_liatrio"]["udeploy_url"] %>
 
   #UDeploy user name (required)
-  udeploy.username=<%= node[:hygieia_liatrio][:udeploy_username] %>
+  udeploy.username=<%= node["hygieia_liatrio"]["udeploy_username"] %>
 
   #UDeploy password (required)
-  udeploy.password=<%= node[:hygieia_liatrio][:udeploy_password] %>
+  udeploy.password=<%= node["hygieia_liatrio"]["udeploy_password"] %>
 
   #Sonar server(s) (required) - Can provide multiple
-  sonar.servers[0]=<%= node[:hygieia_liatrio][:sonar_url] %>
+  sonar.servers[0]=<%= node["hygieia_liatrio"]["sonar_url"] %>
 
   #Sonar Metrics
   sonar.metrics=ncloc,line_coverage,violations,critical_violations,major_violations,blocker_violations,sqale_index,test_success_density,test_failures,test_errors,tests
 
 
   #mandatory
-  git.host=<%= node[:hygieia_liatrio][:stash_url] %>
+  git.host=<%= node["hygieia_liatrio"]["stash_url"] %>
 
   #mandatory
   git.api=/rest/api/1.0/

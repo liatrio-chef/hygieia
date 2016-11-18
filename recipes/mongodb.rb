@@ -6,11 +6,11 @@
 #
 
 # setup mongodb repo
-cookbook_file '/etc/yum.repos.d/mongodb-3.2.repo' do
-  source 'etc/yum.repos.d/mongodb-3.2.repo'
-  owner 'root'
-  group 'root'
-  mode '0644'
+cookbook_file "/etc/yum.repos.d/mongodb-3.2.repo" do
+  source "mongodb-3.2.repo"
+  owner "root"
+  group "root"
+  mode "0644"
   action :create
 end
 
@@ -21,11 +21,11 @@ end
   end
 end
 
-cookbook_file '/etc/mongod.conf' do
-  source 'etc/mongod.conf'
-  owner 'root'
-  group 'root'
-  mode '0644'
+cookbook_file "/etc/mongod.conf" do
+  source "mongod.conf"
+  owner "root"
+  group "root"
+  mode "0644"
   action :create
 end
 
@@ -34,25 +34,25 @@ service "mongod" do
   action [ :enable, :start ]
 end
 
-cookbook_file '/home/vagrant/createdb.js' do
-  source 'home/vagrant/createdb.js'
-  owner 'vagrant'
-  group 'vagrant'
-  mode '0644'
+cookbook_file "#{node["hygieia_liatrio"]["home"]}/createdb.js" do
+  source "createdb.js"
+  user node["hygieia_liatrio"]["user"]
+  group node["hygieia_liatrio"]["group"]
+  mode "0644"
   action :create
 end
 
 # create mongo db user
-execute 'create-mongo-db-user' do
-  command 'mongo dashboard /home/vagrant/createdb.js'
-  user 'vagrant'
-  group 'vagrant'
-  not_if do ::File.exists?('/home/vagrant/createdb.done') end
+execute "create-mongo-db-user" do
+  command "mongo dashboard #{node["hygieia_liatrio"]["home"]}/createdb.js"
+  user node["hygieia_liatrio"]["user"]
+  group node["hygieia_liatrio"]["group"]
+  not_if { ::File.exists?("#{node["hygieia_liatrio"]["home"]}/createdb.done") }
 end
 
 # create lock file, should make this into a mongodb command
-file '/home/vagrant/createdb.done' do
-  user 'vagrant'
-  group 'vagrant'
+file "#{node["hygieia_liatrio"]["home"]}/createdb.done" do
+  user node["hygieia_liatrio"]["user"]
+  group node["hygieia_liatrio"]["group"]
   action :create
 end
