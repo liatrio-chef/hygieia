@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-User=hygieia
+User=<%= @user %>
 WorkingDirectory=<%= @jar_home %>/Hygieia/UI
 ExecStart=/bin/gulp serve
 Restart=on-abort

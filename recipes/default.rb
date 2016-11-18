@@ -107,6 +107,7 @@ node["hygieia_liatrio"]["collectors"].each do |hygieia_service|
       mode "0644"
       variables ({
       :jar_home => node["hygieia_liatrio"]["home"],
+      :user => node["hygieia_liatrio"]["user"]
       })
       action :create
     end

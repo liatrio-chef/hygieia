@@ -4,7 +4,7 @@ After=hygieia-api.service
 
 [Service]
 Type=simple
-User=hygieia
+User=<%= @user %>
 WorkingDirectory=<%= @jar_home %>
 ExecStart=/usr/bin/java -jar <%= @jar_home %>/stash-scm-collector-2.0.2-SNAPSHOT.jar --spring.config.location=<%= @jar_home %>/dashboard.properties
 Restart=on-abort
