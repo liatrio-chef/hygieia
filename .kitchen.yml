@@ -10,9 +10,9 @@ suites:
   - name: hygieia-liatrio
     run_list:
       - recipe[hygieia-liatrio::default]
-      - recipe[hygieia-liatrio::mongodb]
+#      - recipe[hygieia-liatrio::mongodb]
       - recipe[hygieia-liatrio::node]
-      - recipe[hygieia-liatrio::apache2]
+#      - recipe[hygieia-liatrio::apache2]
     attributes:
       java:
         jdk_version: "8"
