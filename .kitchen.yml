@@ -9,8 +9,8 @@ platforms:
 suites:
   - name: hygieia-liatrio
     run_list:
+      - recipe[hygieia-liatrio::mongodb]
       - recipe[hygieia-liatrio::default]
-#      - recipe[hygieia-liatrio::mongodb]
       - recipe[hygieia-liatrio::node]
 #      - recipe[hygieia-liatrio::apache2]
     attributes:
