@@ -1,12 +1,12 @@
 [Unit]
 Description=Hygieia API Service
-After=hygieia-core-2.0.4-SNAPSHOT.jar.service
+After=network.target
 
 [Service]
 Type=simple
 User=<%= @user %>
 WorkingDirectory=<%= @jar_home %>
-ExecStart=/usr/bin/java -jar <%= @jar_home %>/api.jar --spring.config.location=<%= @jar_home %>/dashboard.properties
+ExecStart=/usr/bin/java -jar <%= @jar_home %>/core-2.0.3.jar --spring.config.location=<%= @jar_home %>/dashboard.properties
 Restart=on-abort
 
 

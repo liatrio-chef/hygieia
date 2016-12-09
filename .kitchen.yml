@@ -7,13 +7,12 @@ platforms:
   - name: centos-7.2
 
 suites:
-  - name: default
+  - name: hygieia-liatrio
     run_list:
-      - recipe[hygieia-liatrio::default]
       - recipe[hygieia-liatrio::mongodb]
+      - recipe[hygieia-liatrio::default]
       - recipe[hygieia-liatrio::node]
-      - recipe[hygieia-liatrio::apache2]
-    attributes: {
-      java.jdk_version: "8",
-      foo: "bar"
-    }
+#      - recipe[hygieia-liatrio::apache2]
+    attributes:
+      java:
+        jdk_version: "8"
