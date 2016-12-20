@@ -34,7 +34,7 @@ service 'mongod' do
   action [:enable, :start]
 end
 
-cookbook_file "/tmp/createdb.js" do
+cookbook_file '/tmp/createdb.js' do
   source 'createdb.js'
   user node['hygieia_liatrio']['user']
   group node['hygieia_liatrio']['group']
@@ -44,14 +44,14 @@ end
 
 # create mongo db user
 execute 'create-mongo-db-user' do
-  command "mongo dashboard /tmp/createdb.js"
+  command 'mongo dashboard /tmp/createdb.js'
   user node['hygieia_liatrio']['user']
   group node['hygieia_liatrio']['group']
-  not_if { ::File.exist?("/tmp/createdb.done") }
+  not_if { ::File.exist?('/tmp/createdb.done') }
 end
 
 # create lock file, should make this into a mongodb command
-file "/tmp/createdb.done" do
+file '/tmp/createdb.done' do
   user node['hygieia_liatrio']['user']
   group node['hygieia_liatrio']['group']
   action :create
