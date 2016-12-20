@@ -28,6 +28,9 @@ Vagrant.configure(2) do |config|
   config.berkshelf.enabled = true
 
   config.vm.provision 'chef_solo' do |chef|
+
+    chef.version = '12.16.42'
+
     chef.add_recipe 'hygieia-liatrio::mongodb'
     chef.add_recipe 'hygieia-liatrio'
     chef.add_recipe 'hygieia-liatrio::node'
