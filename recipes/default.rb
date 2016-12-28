@@ -57,7 +57,7 @@ template "#{node['hygieia_liatrio']['home']}/dashboard.properties" do
 end
 
 # clone Hygieia
-git '/vagrant/Hygieia' do
+git "/vagrant/Hygieia" do
   repository 'https://github.com/liatrio/Hygieia.git'
   revision 'master'
   action :sync
