@@ -45,7 +45,7 @@ end
 
 # ensure hygieia user home directory is 755
 directory node['hygieia_liatrio']['home'] do
-  mode 0o755
+  mode 0755
 end
 
 # Add Hygieia dashboard.properties for collector config
@@ -57,7 +57,7 @@ template "#{node['hygieia_liatrio']['home']}/dashboard.properties" do
 end
 
 # clone Hygieia
-git "/vagrant/Hygieia" do
+git '/vagrant/Hygieia' do
   repository 'https://github.com/liatrio/Hygieia.git'
   revision 'master'
   action :sync
@@ -165,8 +165,9 @@ node['hygieia_liatrio']['collectors'].each do |hygieia_service|
 end
 
 # build hygieia-ui
-execute 'mvn clean install' do
-  command 'sudo -u vagrant mvn clean install'
+execute 'bower install' do
+  command 'sudo -u vagrant bower install'
+  user 'root'
   user 'root'
   cwd '/vagrant/Hygieia/UI'
   notifies :create, 'ruby_block[set the ui_built flag]', :immediately
@@ -198,6 +199,7 @@ execute 'systemctl daemon-reload' do
   user 'root'
 end
 
+# start the hygieia UI
 service 'hygieia-ui' do
   action [:enable, :start]
 end

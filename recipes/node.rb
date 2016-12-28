@@ -1,48 +1,36 @@
 #
 # Cookbook Name:: hygieia-liatrio
-# Recipe:: node
+# Recipe:: nvm
 #
 # Author: Drew Holt <drew@liatrio.com>
 #
 
-# install epel
-# package "epel-release"
+version = 'v5.4.1'
+node.set['nvm']['nvm_install_test']['version'] = version
 
-# install nodejs and npm
-# %w{ nodejs npm }.each do |pkg|
-#  package pkg do
-#    action :install
-#  end
-# end
+include_recipe 'nvm'
 
-# add node yum repo
-execute 'add_node6_repo' do
-  command 'curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -'
-  not_if { ::File.exist?('/etc/yum.repos.d/nodesource-el.repo') }
+nvm_install version  do
+  from_source false
+  user 'vagrant'
+  alias_as_default true
+  action :create
 end
 
-# install node.js via yum
-package 'nodejs'
-
-# install bower (1st time)
-execute 'install-bower-1st' do
-  command 'npm install -g bower'
-  user 'root'
-  group 'root'
+# source nvm
+execute 'source mvn' do
+  environment ({'NVM_DIR' => '/home/vagrant/.nvm'})
+  command '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
+  user 'vagrant'
+  group 'vagrant'
+  cwd '/home/vagrant'
 end
 
-# install bower (2nd time), needed to run twice for some reason? fix this
-execute 'install-bower-2nd' do
-  command 'npm install -g bower'
+# install bower and gulp globablly
+execute 'install bower gulp' do
+  command 'sudo -u vagrant sh -c "source /home/vagrant/.bashrc && npm install -g bower gulp"'
   user 'root'
   group 'root'
-  # not_if ('which bower')
-end
-
-# install gulp
-execute 'install-gulp' do
-  command 'npm install -g gulp'
-  user 'root'
-  group 'root'
-  not_if 'which gulp'
+  cwd '/home/vagrant'
+  not_if 'which bower'
 end

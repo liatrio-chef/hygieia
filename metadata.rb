@@ -10,3 +10,4 @@ version          '0.6.0'
 
 depends 'java', '~> 1.42.0'
 depends 'apache2', '~> 3.2.2'
+depends 'nvm', '~> 0.1.7'

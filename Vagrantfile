@@ -31,8 +31,8 @@ Vagrant.configure(2) do |config|
     chef.version = '12.16.42'
 
     chef.add_recipe 'hygieia-liatrio::mongodb'
-    chef.add_recipe 'hygieia-liatrio'
     chef.add_recipe 'hygieia-liatrio::node'
+    chef.add_recipe 'hygieia-liatrio'
     chef.add_recipe 'hygieia-liatrio::apache2'
     # chef.add_recipe "hygieia-liatrio::mongodb_sample_data" # add this recipe to add dummy data
     chef.json = {
