@@ -43,6 +43,7 @@ Vagrant.configure(2) do |config|
         'user' => 'vagrant',
         'group' => 'vagrant',
         'home' => '/home/vagrant',
+        'symlink' => '/vagrant/Hygieia/UI/dist',
         'dbname' => 'dashboard',
         'dbhost' => '127.0.0.1',
         'dbport' => 27017,

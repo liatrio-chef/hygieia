@@ -18,6 +18,7 @@ end
 %w(mongodb-org).each do |pkg|
   package pkg do
     action :install
+    not_if 'which mongo'
   end
 end
 

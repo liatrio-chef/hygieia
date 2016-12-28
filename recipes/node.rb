@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: hygieia-liatrio
-# Recipe:: nvm
+# Recipe:: node
 #
 # Author: Drew Holt <drew@liatrio.com>
 #
@@ -10,20 +10,11 @@ node.set['nvm']['nvm_install_test']['version'] = version
 
 include_recipe 'nvm'
 
-nvm_install version  do
+nvm_install version do
   from_source false
   user 'vagrant'
   alias_as_default true
   action :create
-end
-
-# source nvm
-execute 'source mvn' do
-  environment ({'NVM_DIR' => '/home/vagrant/.nvm'})
-  command '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
-  user 'vagrant'
-  group 'vagrant'
-  cwd '/home/vagrant'
 end
 
 # install bower and gulp globablly
@@ -32,5 +23,5 @@ execute 'install bower gulp' do
   user 'root'
   group 'root'
   cwd '/home/vagrant'
-  not_if 'which bower'
+  not_if 'sudo -u vagrant sh -c "source /home/vagrant.bashrc && which bower'
 end

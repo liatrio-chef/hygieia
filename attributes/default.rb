@@ -1,10 +1,11 @@
 default['hygieia_liatrio']['user']                = 'hygieia'
 default['hygieia_liatrio']['group']               = 'hygieia'
 default['hygieia_liatrio']['home']                = '/opt/hygieia'
-default['hygieia_liatrio']['symlink']             = '/home/vagrant/Hygieia/UI/dist'
+default['hygieia_liatrio']['symlink']             = '/vagrant/Hygieia/UI/dist'
 default['hygieia_liatrio']['parent_cookbook']	= ''
 # default['hygieia_liatrio']['collectors']	= %w(core api ui github-scm-collector jenkins-build-collector sonar-codequality-collector udeploy-deployment-collector stash-scm-collector)
-default['hygieia_liatrio']['collectors']	= %w(api-2.0.3.jar chat-ops-collector-2.0.3.jar jenkins-cucumber-test-collector-2.0.3.jar udeploy-deployment-collector-2.0.3.jar aws-cloud-collector-2.0.3.jar jira-feature-collector-2.0.3.jar versionone-feature-collector-2.0.3.jar bamboo-build-collector-2.0.3.jar github-scm-collector-2.0.3.jar sonar-codequality-collector-2.0.3.jar xldeploy-deployment-collector-2.0.3.jar bitbucket-scm-collector-2.0.3.jar jenkins-build-collector-2.0.3.jar subversion-collector-2.0.3.jar)
+# default['hygieia_liatrio']['collectors']	= %w(api-2.0.3.jar chat-ops-collector-2.0.3.jar jenkins-cucumber-test-collector-2.0.3.jar udeploy-deployment-collector-2.0.3.jar aws-cloud-collector-2.0.3.jar jira-feature-collector-2.0.3.jar versionone-feature-collector-2.0.3.jar bamboo-build-collector-2.0.3.jar github-scm-collector-2.0.3.jar sonar-codequality-collector-2.0.3.jar xldeploy-deployment-collector-2.0.3.jar bitbucket-scm-collector-2.0.3.jar jenkins-build-collector-2.0.3.jar subversion-collector-2.0.3.jar)
+default['hygieia_liatrio']['collectors']	= %w(api-2.0.3.jar jira-feature-collector-2.0.3.jar github-scm-collector-2.0.3.jar sonar-codequality-collector-2.0.3.jar bitbucket-scm-collector-2.0.3.jar jenkins-build-collector-2.0.3.jar)
 default['hygieia_liatrio']['dbname']		= 'dashboard'
 default['hygieia_liatrio']['dbhost']		= '127.0.0.1'
 default['hygieia_liatrio']['dbport']		= '27017'
