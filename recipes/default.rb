@@ -168,7 +168,7 @@ end
 execute 'mvn clean install' do
   command 'sudo -u vagrant mvn clean install'
   user 'root'
-  cwd "#{node['hygieia_liatrio']['home']}/Hygieia/UI"
+  cwd '/vagrant/Hygieia/UI'
   notifies :create, 'ruby_block[set the ui_built flag]', :immediately
 end
 
