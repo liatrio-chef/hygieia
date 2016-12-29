@@ -4,3 +4,4 @@ metadata
 
 cookbook 'java'
 cookbook 'apache2'
+cookbook 'nvm'

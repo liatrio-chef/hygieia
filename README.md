@@ -1,6 +1,6 @@
 hygieia-liatrio Cookbook
 ========================
-A cookbook to compile hygieia with github, bitbucket, jira, jenkins, udeploy, and sonar collectors on CentOS 7.
+A cookbook to assemble [Hygieia](http://github.com/capitaone/Hygieia) via Chef on CentOS 7 with support for extending UI.
 
 Supported Platforms
 -------------------
@@ -8,15 +8,15 @@ CentOS 7
 
 Requirements
 ------------
-Vagrant 1.8.1
+[Vagrant 1.8.4](http://vagrantup.com/)
 
-Ensure the ChefDK is installed from https://downloads.chef.io/chef-dk/
+[ChefDK 0.16.28](https://downloads.chef.io/chef-dk/)
 
-Ensure the vagrant-berkshelf plugin is installed: `vagrant plugin install vagrant-berkshelf`
+vagrant-berkshelf (5.0.0): `vagrant plugin install vagrant-berkshelf`
 
 Usage
 -----
-A baked version of this cookbook configured and with dummy data can be found here: https://github.com/liatrio-chef/hygieia-petclinic-demo-baked
+A baked version of this cookbook configured with dummy data can only be found here: https://github.com/liatrio-chef/hygieia-petclinic-demo-baked
 
 A baked version of this cookbook uncofnigured can be found here:
 https://github.com/liatrio-chef/hygieia-dev-baked
@@ -28,16 +28,11 @@ cd hygieia-liatrio
 vagrant up
 ```
 
-On the first vagrant up the chef provisioner will install mongodb, create a mongo db with user db and password dbpass, compile hygieia, and start on boot. 
+On the first vagrant up the Chef provisioner will install mongodb, create a mongo db with user db and password dbpass, compile Hygieia, and start on boot.
 
-If maven fails to compile itt may be needed to `vagrant ssh` to the VM and then run;
-```
-cd ~/Hygieia
-mvn clean install
-``` 
-This may need to be done mulltiple times as there are network issues when maven tries to mirror artifacts through Archiva. Once maven has compiled successfully, restart the Hygieia collectors: `cd /etc/systemd/system; sudo systemctl restart hygieia-*`.
+If Chef run fails it may do to network. Simply run another `vagrant provision`. Once the provision has finished successfully, restart the Hygieia collectors: `cd /etc/systemd/system; sudo systemctl restart hygieia-*`.
 
-Once successful, point your browser to http://localhost:13000/ - Hygieia listens on TCP3000 and is forwarded to TCP13000 in the supplied Vagrantfile.
+When done you may point your browser to http://localhost:13000/ - Hygieia listens on TCP3000 and is forwarded to TCP13000 in the Vagrantfile.
 
 Attributes
 ----------

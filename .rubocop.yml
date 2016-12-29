@@ -1,3 +1,6 @@
+AllCops:
+  Exclude:
+    - Hygieia/*
 NumericLiterals:
   Enabled: false
 Metrics/LineLength:

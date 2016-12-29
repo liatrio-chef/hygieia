@@ -1,5 +1,5 @@
 [Unit]
-Description=Hygieia API Service
+Description=<%= @hygieia_service %>
 After=core-2.0.4-SNAPSHOT.jar.service
 
 [Service]
