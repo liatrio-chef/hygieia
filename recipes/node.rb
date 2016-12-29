@@ -23,5 +23,5 @@ execute 'install bower gulp' do
   user 'root'
   group 'root'
   cwd '/home/vagrant'
-  not_if 'sudo -u vagrant sh -c "source /home/vagrant.bashrc && which bower'
+  not_if 'sudo -u vagrant sh -c "source /home/vagrant.bashrc && which bower"'
 end

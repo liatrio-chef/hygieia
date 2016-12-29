@@ -74,21 +74,21 @@ end
 
 # pull api, core, and collectors from maven central
 jar = [
-  'https://repo1.maven.org/maven2/com/capitalone/dashboard/api/2.0.3/api-2.0.3.jar',
-  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/core/2.0.3/core-2.0.3.jar',
-  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/subversion-collector/2.0.3/subversion-collector-2.0.3.jar',
-  'https://repo1.maven.org/maven2/com/capitalone/dashboard/github-scm-collector/2.0.3/github-scm-collector-2.0.3.jar',
-  'https://repo1.maven.org/maven2/com/capitalone/dashboard/bitbucket-scm-collector/2.0.3/bitbucket-scm-collector-2.0.3.jar',
-  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/chat-ops-collector/2.0.3/chat-ops-collector-2.0.3.jar',
-  # 'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/versionone-feature-collector/2.0.3/versionone-feature-collector-2.0.3.jar',
-  'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/jira-feature-collector/2.0.3/jira-feature-collector-2.0.3.jar',
-  # 'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/xldeploy-deployment-collector/2.0.3/xldeploy-deployment-collector-2.0.3.jar',
-  # 'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/udeploy-deployment-collector/2.0.3/udeploy-deployment-collector-2.0.3.jar',
-  # 'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/aws-cloud-collector/2.0.3/aws-cloud-collector-2.0.3.jar',
-  'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/sonar-codequality-collector/2.0.3/sonar-codequality-collector-2.0.3.jar',
-  # 'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/jenkins-cucumber-test-collector/2.0.3/jenkins-cucumber-test-collector-2.0.3.jar',
-  'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/jenkins-build-collector/2.0.3/jenkins-build-collector-2.0.3.jar',
-  # 'http://search.maven.org/remotecontent?filepath=com/capitalone/dashboard/bamboo-build-collector/2.0.3/bamboo-build-collector-2.0.3.jar'
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/api/2.0.4/api-2.0.4.jar',
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/core/2.0.4/core-2.0.4.jar',
+  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/subversion-collector/2.0.4/subversion-collector-2.0.4.jar',
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/github-scm-collector/2.0.4/github-scm-collector-2.0.4.jar',
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/bitbucket-scm-collector/2.0.4/bitbucket-scm-collector-2.0.4.jar',
+  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/chat-ops-collector/2.0.4/chat-ops-collector-2.0.4.jar',
+  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/versionone-feature-collector/2.0.4/versionone-feature-collector-2.0.4.jar',
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/jira-feature-collector/2.0.4/jira-feature-collector-2.0.4.jar',
+  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/xldeploy-deployment-collector/2.0.4/xldeploy-deployment-collector-2.0.4.jar',
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/udeploy-deployment-collector/2.0.4/udeploy-deployment-collector-2.0.4.jar',
+  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/aws-cloud-collector/2.0.4/aws-cloud-collector-2.0.4.jar',
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/sonar-codequality-collector/2.0.4/sonar-codequality-collector-2.0.4.jar',
+  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/jenkins-cucumber-test-collector/2.0.4/jenkins-cucumber-test-collector-2.0.4.jar',
+  'https://repo1.maven.org/maven2/com/capitalone/dashboard/jenkins-build-collector/2.0.4/jenkins-build-collector-2.0.4.jar',
+  # 'https://repo1.maven.org/maven2/com/capitalone/dashboard/bamboo-build-collector/2.0.4/bamboo-build-collector-2.0.4.jar'
 ]
 
 # download the jar files
