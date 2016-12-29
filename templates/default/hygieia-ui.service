@@ -7,8 +7,8 @@ Type=simple
 User=<%= @user %>
 WorkingDirectory=/vagrant/Hygieia/UI
 ExecStart=/home/vagrant/.nvm/versions/node/v5.4.1/bin/gulp serve
+Environment=PATH=/home/vagrant/.nvm/versions/node/v5.4.1/bin/
 Restart=on-abort
-
 
 [Install]
 WantedBy=multi-user.target
